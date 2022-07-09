@@ -5638,7 +5638,7 @@ __webpack_require__.r(__webpack_exports__);
           console.error(err);
         });
       } else {
-        console.log("2 enviamos info a insertar", this.editedItem);
+        console.log("2 enviamos info a insertar");
         var url = "/insertarData";
         var _params = this.editedItem;
         axios.post(url, _params).then(function (res) {

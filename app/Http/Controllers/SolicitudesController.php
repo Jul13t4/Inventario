@@ -79,31 +79,8 @@ class SolicitudesController extends Controller
         }
     }
 
-    public function eliminarData(Request $request)
-    {
-        DB::beginTransaction();
-        try {
-        $destroySolicitud = Solicitudes::destroy([ 
-                'id_usuario' => $request['id_usuario'],
-                'codigo' => $request['codigo'],
-                'dependencia_soli' => $request['dependencia_soli'],
-                'cantidad_soli' => $request['cantidad_soli'],
-                'cantidad_entre' => $request['cantidad_entre'] ,
-                'recibido_por' => $request['recibido_por'],
-                'estado' => $request['estado']
-            ]);
-            DB::commit();
-            return response()->json(true, 200);
-       } catch (\Exception $ex) {
-           DB::rollBack();
-           $data['respuesta'] = [
-               'codigo' => 500,
-               'error' => $ex->getMessage(),
-               'line' => $ex->getLine()
-           ];
-           return response()->json($data, 500); //así respondemos en http por si sale erro
-        }
-    }
+    
+    
 
     public function productos(Request $request)
     {
