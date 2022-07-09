@@ -252,7 +252,8 @@ export default {
                         console.error(err);
                     });
             } else {
-                console.log("2 enviamos info a insertar");
+
+                console.log("2 enviamos info a insertar" ,this.editedItem);
                 var url = "/insertarData";
                 const params = this.editedItem;
                 axios
