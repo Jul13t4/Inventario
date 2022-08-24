@@ -33,10 +33,10 @@
                                         <v-container>
                                             <v-row>
                                                 <!--  v-if="editedItem.id_usuario"   Listo ya guarda -->
-                                                <v-col cols="12" sm="6" md="12">
+                                                <v-col cols="20" sm="12" md="20">
                                                     <v-autocomplete v-model="editedItem.id_usuario" :items="usuarios"
                                                         dense chips small-chips label="Usuarios" item-value="id"
-                                                        item-text="nombre" outlined 
+                                                        item-text="name" outlined 
                                                         :menu-props="{ bottom: true, offsetY: true }" attach>
                                                     </v-autocomplete>
                                                 </v-col>

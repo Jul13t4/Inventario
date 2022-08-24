@@ -30134,9 +30134,9 @@ var render = function () {
                                                     "v-col",
                                                     {
                                                       attrs: {
-                                                        cols: "12",
-                                                        sm: "6",
-                                                        md: "12",
+                                                        cols: "20",
+                                                        sm: "12",
+                                                        md: "20",
                                                       },
                                                     },
                                                     [
@@ -30148,7 +30148,7 @@ var render = function () {
                                                           "small-chips": "",
                                                           label: "Usuarios",
                                                           "item-value": "id",
-                                                          "item-text": "nombre",
+                                                          "item-text": "name",
                                                           outlined: "",
                                                           "menu-props": {
                                                             bottom: true,
