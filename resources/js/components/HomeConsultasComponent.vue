@@ -5,23 +5,7 @@
                 <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"></v-img>
             </template>
 
-            <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
             <v-app-bar-title>Inventario almacén Unisalud</v-app-bar-title>
-
-            <v-spacer></v-spacer>
-
-            <v-btn icon>
-                <v-icon>mdi-magnify</v-icon>
-            </v-btn>
-
-            <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
-            </v-btn>
-
-            <v-btn icon>
-                <v-icon>mdi-dots-vertical</v-icon>
-            </v-btn>
         </v-app-bar>
         <v-sheet id="scrolling-techniques-2" class="overflow-y-auto" max-height="600">
             <v-container style="height: 1000px">
@@ -58,15 +42,16 @@
                                                 </v-col>
                                                 <v-col cols="12" sm="6" md="4">
                                                     <v-text-field v-model="editedItem.codigo" dense outlined chips
-                                                        small-chips label="Codigo" item-value="id"></v-text-field>
+                                                        small-chips label="Codigo" item-value="id">
+                                                    </v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="6" md="4">
                                                     <v-text-field v-model="editedItem.dependencia_soli"
-                                                        label="Dependencia soli" dense outlined></v-text-field>
+                                                        label="Área" dense outlined></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="6" md="4">
                                                     <v-text-field v-model="editedItem.cantidad_soli" type="number"
-                                                        label="Cantidad soli" dense outlined></v-text-field>
+                                                        label="Cantidad" dense outlined></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12" sm="6" md="4">
                                                     <v-text-field v-model="editedItem.recibido_por" label="Recibido por"
@@ -110,9 +95,6 @@
                     <template v-slot:[`item.actions`]="{ item }">
                         <v-icon small class="mr-2" @click="editItem(item)">
                             mdi-pencil
-                        </v-icon>
-                        <v-icon small @click="deleteItem(item)">
-                            mdi-delete
                         </v-icon>
                     </template>
                     <template v-slot:no-data>

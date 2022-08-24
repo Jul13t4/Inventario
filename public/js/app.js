@@ -5488,24 +5488,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -30039,32 +30021,7 @@ var render = function () {
         },
         [
           _vm._v(" "),
-          _c("v-app-bar-nav-icon"),
-          _vm._v(" "),
           _c("v-app-bar-title", [_vm._v("Inventario almacén Unisalud")]),
-          _vm._v(" "),
-          _c("v-spacer"),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            { attrs: { icon: "" } },
-            [_c("v-icon", [_vm._v("mdi-magnify")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            { attrs: { icon: "" } },
-            [_c("v-icon", [_vm._v("mdi-heart")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            { attrs: { icon: "" } },
-            [_c("v-icon", [_vm._v("mdi-dots-vertical")])],
-            1
-          ),
         ],
         1
       ),
@@ -30272,8 +30229,7 @@ var render = function () {
                                                     [
                                                       _c("v-text-field", {
                                                         attrs: {
-                                                          label:
-                                                            "Dependencia soli",
+                                                          label: "Área",
                                                           dense: "",
                                                           outlined: "",
                                                         },
@@ -30311,8 +30267,7 @@ var render = function () {
                                                       _c("v-text-field", {
                                                         attrs: {
                                                           type: "number",
-                                                          label:
-                                                            "Cantidad soli",
+                                                          label: "Cantidad",
                                                           dense: "",
                                                           outlined: "",
                                                         },
@@ -30570,23 +30525,6 @@ var render = function () {
                             [
                               _vm._v(
                                 "\n                        mdi-pencil\n                    "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-icon",
-                            {
-                              attrs: { small: "" },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.deleteItem(item)
-                                },
-                              },
-                            },
-                            [
-                              _vm._v(
-                                "\n                        mdi-delete\n                    "
                               ),
                             ]
                           ),
