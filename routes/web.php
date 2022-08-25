@@ -11,14 +11,11 @@ Route::get('/', function () {
     return view('home');
 })->middleware('auth');
 
-Route::get('/register', [RegisterController::class, 'create'])
-    ->middleware('guest')
-    ->name('register.index');
+/**
+ * rutas de login
+ */              //ruta         controlador             //nombre funcion
 
-Route::post('/register', [RegisterController::class, 'store'])
-    ->name('register.store');
-
-    Route::get('/login', [SessionsController::class, 'create'])
+Route::get('/login', [SessionsController::class, 'create'])
     ->middleware('guest')
     ->name('login.index');
 
@@ -28,6 +25,16 @@ Route::post('/login', [SessionsController::class, 'store'])
 Route::get('/logout', [SessionsController::class, 'destroy'])
     ->middleware('auth')
     ->name('login.destroy');
+
+/**
+ * rutas de registro
+ */              //ruta         controlador             //nombre funcion
+Route::get('/register', [RegisterController::class, 'create'])
+    ->middleware('guest')
+    ->name('register.index');
+
+Route::post('/register', [RegisterController::class, 'store'])
+    ->name('register.store');
 
 Route::get('/admin', [AdminController::class, 'index'])
     ->middleware('auth.admin')
@@ -45,7 +52,6 @@ Route::get('ListadoSolicitudes',[SolicitudesController::class,'ListadoSolicitude
 Route::post('guardarData',[SolicitudesController::class,'guardarData']);
 Route::post('insertarData',[SolicitudesController::class,'insertarData']);
 Route::post('usuarios',[SolicitudesController::class,'usuarios']);
-Route::delete('eliminarData',[SolicitudesController::class,'eliminarData']);
 
 /**
  * rutas user

@@ -19,5 +19,13 @@ class DatabaseSeeder extends Seeder
         $this->call(SolicitudesTableSeeder::class);
         $this->call(ProductoTableSeeder::class);
         $this->call(ClasificacionProductosTableSeeder::class);
+
+        $user = new User;
+        $user->name = 'Admin';
+        $user->email = 'admin@test.com';
+        $user->password = 'admin1234';
+        $user->role = 'admin';
+
+        $user->save();
     }
 }

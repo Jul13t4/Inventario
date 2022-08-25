@@ -151,7 +151,7 @@ export default {
             return [
                 {
                     name: "Usuarios",
-                    children: this.users, //? ya lo deje jajajaja   mira si puedes acmomodar la data  eso es facil jejeje te dejo chaooo gracias aooo :*
+                    children: this.users, 
                 },
             ];
         },

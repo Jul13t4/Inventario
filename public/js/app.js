@@ -5384,132 +5384,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       dialog: false,
       dialogDelete: false,
       headers: [{
-        text: "Solicitante",
+        text: "Recibido por:",
         align: "start",
         sortable: false,
         value: "recibido_por"
       }, {
+        text: "Usuario",
+        value: "id_usuario"
+      }, {
         text: "Elemento",
         value: "codigo"
       }, {
-        text: "dependencia_soli",
+        text: "Área",
         value: "dependencia_soli"
       }, {
-        text: "cantidad_soli",
+        text: "Cantidad",
         value: "cantidad_soli"
-      }, {
-        text: "cantidad_entre",
-        value: "cantidad_entre"
       }, {
         text: "estado",
         value: "estado"
@@ -5606,7 +5502,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       if (this.editedIndex > -1) {
-        console.log("1 entra osea enviamos info ");
+        console.log("Cargar información");
         Object.assign(this.desserts[this.editedIndex], this.editedItem);
         var url = "/guardarData";
         var params = this.editedItem;
@@ -5620,7 +5516,7 @@ __webpack_require__.r(__webpack_exports__);
           console.error(err);
         });
       } else {
-        console.log("2 enviamos info a insertar");
+        console.log("Insertar información");
         var url = "/insertarData";
         var _params = this.editedItem;
         axios.post(url, _params).then(function (res) {
@@ -5831,8 +5727,7 @@ var pause = function pause(ms) {
     items: function items() {
       return [{
         name: "Usuarios",
-        children: this.users //? ya lo deje jajajaja   mira si puedes acmomodar la data  eso es facil jejeje te dejo chaooo gracias aooo :*
-
+        children: this.users
       }];
     },
     selected: function selected() {
@@ -30286,89 +30181,6 @@ var render = function () {
                                                           },
                                                           expression:
                                                             "editedItem.cantidad_soli",
-                                                        },
-                                                      }),
-                                                    ],
-                                                    1
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-col",
-                                                    {
-                                                      attrs: {
-                                                        cols: "12",
-                                                        sm: "6",
-                                                        md: "4",
-                                                      },
-                                                    },
-                                                    [
-                                                      _c("v-text-field", {
-                                                        attrs: {
-                                                          label: "Recibido por",
-                                                          dense: "",
-                                                          outlined: "",
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.editedItem
-                                                              .recibido_por,
-                                                          callback: function (
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.editedItem,
-                                                              "recibido_por",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "editedItem.recibido_por",
-                                                        },
-                                                      }),
-                                                    ],
-                                                    1
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "v-col",
-                                                    {
-                                                      attrs: {
-                                                        cols: "12",
-                                                        sm: "6",
-                                                        md: "4",
-                                                      },
-                                                    },
-                                                    [
-                                                      _c("v-select", {
-                                                        attrs: {
-                                                          label: "Estado",
-                                                          items: [
-                                                            "Activo",
-                                                            "Inactivo",
-                                                          ],
-                                                          "menu-props": {
-                                                            bottom: true,
-                                                            offsetY: true,
-                                                          },
-                                                          attach: "",
-                                                          dense: "",
-                                                          outlined: "",
-                                                        },
-                                                        model: {
-                                                          value:
-                                                            _vm.editedItem
-                                                              .estado,
-                                                          callback: function (
-                                                            $$v
-                                                          ) {
-                                                            _vm.$set(
-                                                              _vm.editedItem,
-                                                              "estado",
-                                                              $$v
-                                                            )
-                                                          },
-                                                          expression:
-                                                            "editedItem.estado",
                                                         },
                                                       }),
                                                     ],

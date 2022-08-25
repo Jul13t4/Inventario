@@ -53,7 +53,7 @@
                                                     <v-text-field v-model="editedItem.cantidad_soli" type="number"
                                                         label="Cantidad" dense outlined></v-text-field>
                                                 </v-col>
-                                                <v-col cols="12" sm="6" md="4">
+                                               <!--<v-col cols="12" sm="6" md="4"> 
                                                     <v-text-field v-model="editedItem.recibido_por" label="Recibido por"
                                                         dense outlined></v-text-field>
                                                 </v-col>
@@ -62,7 +62,7 @@
                                                         :items="['Activo', 'Inactivo']"
                                                         :menu-props="{ bottom: true, offsetY: true }" attach dense
                                                         outlined></v-select>
-                                                </v-col>
+                                                </v-col>-->
                                             </v-row>
                                         </v-container>
                                     </v-card-text>
