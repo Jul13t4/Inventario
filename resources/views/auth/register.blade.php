@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Register')
+@section('title', 'Registro')
 
 @section('content')
 
@@ -14,7 +14,7 @@ rounded-lg shadow-lg">
     @csrf
 
     <input type="text" class="border border-gray-200 rounded-md bg-gray-200 w-full
-    text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Name"
+    text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Nombre"
     id="name" name="name">
 
     @error('name')        
@@ -32,7 +32,7 @@ rounded-lg shadow-lg">
     @enderror
 
     <input type="password" class="border border-gray-200 rounded-md bg-gray-200 w-full
-    text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Password"
+    text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" placeholder="Contraseña"
     id="password" name="password">
 
     @error('password')        
@@ -42,7 +42,7 @@ rounded-lg shadow-lg">
 
     <input type="password" class="border border-gray-200 rounded-md bg-gray-200 
     w-full text-lg placeholder-gray-900 p-2 my-2 focus:bg-white" 
-    placeholder="Password confirmation" id="password_confirmation" 
+    placeholder="Confirmar Contraseña" id="password_confirmation" 
     name="password_confirmation">
 
     <button type="submit" class="rounded-md bg-indigo-500 w-full text-lg

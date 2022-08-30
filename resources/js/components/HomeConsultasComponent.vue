@@ -1,13 +1,12 @@
 <template>
     <v-card class="overflow-hidden">
         <v-app-bar absolute color="#37474F" dark scroll-target="#scrolling-techniques-2">
-            <template v-slot:img="{ props }">
+            <template v-slot:img="{props}">
                 <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"></v-img>
             </template>
-
             <v-app-bar-title>Inventario almacén Unisalud</v-app-bar-title>
         </v-app-bar>
-        <v-sheet id="scrolling-techniques-2" class="overflow-y-auto" max-height="600">
+        <v-sheet id="scrolling-techniques-2" class="overflow-y-auto" max-height="900">
             <v-container style="height: 1000px">
                 <v-data-table :headers="headers" :items="desserts" sort-by="Solicitudes" class="elevation-1"
                     style="position: sticky; top: 142px">
@@ -169,9 +168,10 @@ export default {
     },
 
     methods: {
+        
         initialize() {
-            var url = "/ListadoSolicitudes";
-            var urlU = "/usuarios";
+            var url = "/ListadoSolicitudes"; //ruta donde busca el controlador
+            var urlU = "/usuarios"; //este es un axios de peticion 
             axios.all([axios.get(url), axios.post(urlU)])
                 .then(axios.spread((res1, res2) => {
                     this.desserts = res1.data;
@@ -255,6 +255,16 @@ export default {
         },
         getUsuarios() {
             var url = "/usuarios"
+            axios.post(url)
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(err => {
+                    console.error(err);
+                })
+        },
+        getElementos() {
+            var url = "/elementos"
             axios.post(url)
                 .then(res => {
                     console.log(res)

@@ -42,17 +42,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 var INVALID_ELEMENT_ERROR = 'Popper: Invalid reference or popper argument provided. They must be either a DOM element or virtual element.';
 var INFINITE_LOOP_ERROR = 'Popper: An infinite loop in the modifiers cycle has been detected! The cycle has been interrupted to prevent a browser crash.';
 var DEFAULT_OPTIONS = {
@@ -416,17 +405,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _getNodeName_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./getNodeName.js */ "./node_modules/@popperjs/core/lib/dom-utils/getNodeName.js");
 /* harmony import */ var _utils_rectToClientRect_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/rectToClientRect.js */ "./node_modules/@popperjs/core/lib/utils/rectToClientRect.js");
 /* harmony import */ var _utils_math_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../utils/math.js */ "./node_modules/@popperjs/core/lib/utils/math.js");
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -5384,28 +5362,131 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       dialog: false,
       dialogDelete: false,
       headers: [{
-        text: "Recibido por:",
+        text: "Solicitante",
         align: "start",
         sortable: false,
         value: "recibido_por"
       }, {
-        text: "Usuario",
-        value: "id_usuario"
-      }, {
         text: "Elemento",
         value: "codigo"
       }, {
-        text: "Área",
+        text: "dependencia_soli",
         value: "dependencia_soli"
       }, {
-        text: "Cantidad",
+        text: "cantidad_soli",
         value: "cantidad_soli"
+      }, {
+        text: "cantidad_entre",
+        value: "cantidad_entre"
       }, {
         text: "estado",
         value: "estado"
@@ -5502,7 +5583,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       if (this.editedIndex > -1) {
-        console.log("Cargar información");
+        console.log("1 entra osea enviamos info ");
         Object.assign(this.desserts[this.editedIndex], this.editedItem);
         var url = "/guardarData";
         var params = this.editedItem;
@@ -5516,7 +5597,7 @@ __webpack_require__.r(__webpack_exports__);
           console.error(err);
         });
       } else {
-        console.log("Insertar información");
+        console.log("2 enviamos info a insertar");
         var url = "/insertarData";
         var _params = this.editedItem;
         axios.post(url, _params).then(function (res) {
@@ -29925,7 +30006,7 @@ var render = function () {
         "v-sheet",
         {
           staticClass: "overflow-y-auto",
-          attrs: { id: "scrolling-techniques-2", "max-height": "600" },
+          attrs: { id: "scrolling-techniques-2", "max-height": "900" },
         },
         [
           _c(
