@@ -47,6 +47,9 @@ Route::get('/data', function () {
 Route::get('/usuarios', function () {
     return view('usuarios');
 });
+Route::get("/productos-view/", function () {
+    return view('welcome');
+});
 
 Route::get('ListadoSolicitudes',[SolicitudesController::class,'ListadoSolicitudes']);
 Route::post('guardarData',[SolicitudesController::class,'guardarData']);
@@ -62,3 +65,4 @@ Route::get('ListadoUsuarios',[UsuariosController::class,'ListadoUsuarios']);
  * rutas productos
  */              //ruta         controlador             //nombre funcion
  Route::get('Productos',[SolicitudesController::class,'productos']);
+ Route::get('showProducts',[AdminController::class,'showProducts']);

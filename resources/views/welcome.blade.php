@@ -46,7 +46,7 @@
                 <v-container fluid>
 
                 <!-- If using vue-router -->
-                <router-view></router-view>
+                <!-- <router-view></router-view> -->                
                 <!-- <example-component></example-component> -->
             </v-container>
             </v-main>

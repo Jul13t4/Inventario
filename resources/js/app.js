@@ -18,12 +18,16 @@ Vue.use(VueRouter)
 
 Vue.component('home-consultas-component', require('./components/HomeConsultasComponent.vue').default);
 Vue.component('usuarios-consultas-component', require('./components/UsuariosComponent.vue').default);
+Vue.component('productos-consultas-component', require('./components/ProductosComponent.vue').default); //declaramos el componente
 
 let  home_consultas = {
     template: `<home-consultas-component></home-consultas-component>`
 }
 let  usuarios_consultas = {
     template: `<usuarios-consultas-component></usuarios-consultas-component>`
+}
+let  productos_consulta = {//lo asignamos a una variable manipulable en router
+    template: `<productos-consultas-component></productos-consultas-component>`
 }
 
 const router = new VueRouter({
@@ -40,9 +44,17 @@ const router = new VueRouter({
         name: 'users',
         component: usuarios_consultas
 
+    },
+        {//creamos la ruta en el app.js  
+        path: '/productos-view/',
+        name: 'product',
+        component: productos_consulta
+
     }
 ],
-    module: 'history'
+    module: 'history',
+    hashbang: false,
+    linkActiveClass: 'active'
 });
 
 const app = new Vue({

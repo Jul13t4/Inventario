@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Producto;
 
 class AdminController extends Controller {
     
@@ -10,4 +11,15 @@ class AdminController extends Controller {
 
         return 'Admin';
     }
+
+    /**
+     * Vamos a crrearla funcion para mostrar la data
+     * 
+     * ok la funcion y la ruta 
+     */
+
+     public function showProducts()
+     {
+        return Producto::get();
+     }
 }

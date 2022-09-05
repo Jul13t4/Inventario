@@ -75,7 +75,7 @@ class SolicitudesController extends Controller
                 'error' => $ex->getMessage(),
                 'line' => $ex->getLine()
             ];
-            return response()->json($data, 500); //así respondemos en http por si sale error
+            return response()->json($data, 500); //así respondemos en http por si sale error  :)
         }
     }
 
