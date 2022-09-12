@@ -1,167 +1,253 @@
 <template>
-    <v-card>
-      <v-card-title class="indigo white--text text-h5">
-        User Directory
-      </v-card-title>
-      <v-row
-        class="pa-4"
-        justify="space-between"
-      >
-        <v-col cols="5">
-          <v-treeview
-            :active.sync="active"
-            :items="items"
-            :load-children="fetchUsers"
-            :open.sync="open"
-            activatable
-            color="warning"
-            open-on-click
-            transition
-          >
-            <template v-slot:prepend="{ item }">
-              <v-icon v-if="!item.children">
-                mdi-account
-              </v-icon>
-            </template>
-          </v-treeview>
-        </v-col>
-  
-        <v-divider vertical></v-divider>
-  
-        <v-col
-          class="d-flex text-center"
-        >
-          <v-scroll-y-transition mode="out-in">
-            <div
-              v-if="!selected"
-              class="text-h6 grey--text text--lighten-1 font-weight-light"
-              style="align-self: center;"
-            >
-              Select a User
-            </div>
-            <v-card
-              v-else
-              :key="selected.id"
-              class="pt-6 mx-auto"
-              flat
-              max-width="400"
-            >
-              <v-card-text>
-                <v-avatar
-                  v-if="avatar"
-                  size="88"
+    <div class="main-wrap">
+        <div class="search-content">
+            <v-container>
+                <sorter
+                    :view="toggleView"
+                    :sort-by-selected="sortBySelected"
+                    :result-length="filteredItems.length"
+                    @switch-view="handleToggleView"
+                    @sort-by="handleSortBy"
+                    @open-filter="handleOpenFilter"
+                />
+                <v-dialog
+                    v-model="dialog"
+                    fullscreen
+                    hide-overlay
+                    transition="dialog-bottom-transition"
                 >
-                  <v-img
-                    :src="`https://avataaars.io/${avatar}`"
-                    class="mb-6"
-                  ></v-img>
-                </v-avatar>
-                <h3 class="text-h5 mb-2">
-                  {{ selected.name }}
-                </h3>
-                <div class="blue--text mb-2">
-                  {{ selected.email }}
-                </div>
-                <div class="blue--text subheading font-weight-bold">
-                  {{ selected.username }}
-                </div>
-              </v-card-text>
-              <v-divider></v-divider>
-              <v-row
-                class="text-left"
-                tag="v-card-text"
-              >
-                <v-col
-                  class="text-right mr-4 mb-2"
-                  tag="strong"
-                  cols="5"
-                >
-                  Company:
-                </v-col>
-                <v-col>{{ selected.company.name }}</v-col>
-                <v-col
-                  class="text-right mr-4 mb-2"
-                  tag="strong"
-                  cols="5"
-                >
-                  Website:
-                </v-col>
-                <v-col>
-                  <a
-                    :href="`//${selected.website}`"
-                    target="_blank"
-                  >{{ selected.website }}</a>
-                </v-col>
-                <v-col
-                  class="text-right mr-4 mb-2"
-                  tag="strong"
-                  cols="5"
-                >
-                  Phone:
-                </v-col>
-                <v-col>{{ selected.phone }}</v-col>
-              </v-row>
-            </v-card>
-          </v-scroll-y-transition>
-        </v-col>
-      </v-row>
-    </v-card>
-  </template>
-  <script>
-    const avatars = [
-      '?accessoriesType=Blank&avatarStyle=Circle&clotheColor=PastelGreen&clotheType=ShirtScoopNeck&eyeType=Wink&eyebrowType=UnibrowNatural&facialHairColor=Black&facialHairType=MoustacheMagnum&hairColor=Platinum&mouthType=Concerned&skinColor=Tanned&topType=Turban',
-      '?accessoriesType=Sunglasses&avatarStyle=Circle&clotheColor=Gray02&clotheType=ShirtScoopNeck&eyeType=EyeRoll&eyebrowType=RaisedExcited&facialHairColor=Red&facialHairType=BeardMagestic&hairColor=Red&hatColor=White&mouthType=Twinkle&skinColor=DarkBrown&topType=LongHairBun',
-      '?accessoriesType=Prescription02&avatarStyle=Circle&clotheColor=Black&clotheType=ShirtVNeck&eyeType=Surprised&eyebrowType=Angry&facialHairColor=Blonde&facialHairType=Blank&hairColor=Blonde&hatColor=PastelOrange&mouthType=Smile&skinColor=Black&topType=LongHairNotTooLong',
-      '?accessoriesType=Round&avatarStyle=Circle&clotheColor=PastelOrange&clotheType=Overall&eyeType=Close&eyebrowType=AngryNatural&facialHairColor=Blonde&facialHairType=Blank&graphicType=Pizza&hairColor=Black&hatColor=PastelBlue&mouthType=Serious&skinColor=Light&topType=LongHairBigHair',
-      '?accessoriesType=Kurt&avatarStyle=Circle&clotheColor=Gray01&clotheType=BlazerShirt&eyeType=Surprised&eyebrowType=Default&facialHairColor=Red&facialHairType=Blank&graphicType=Selena&hairColor=Red&hatColor=Blue02&mouthType=Twinkle&skinColor=Pale&topType=LongHairCurly',
-    ]
-  
-    const pause = ms => new Promise(resolve => setTimeout(resolve, ms))
-  
-    export default {
-      data: () => ({
-        active: [],
-        avatar: null,
-        open: [],
-        users: [],
-      }),
-  
-      computed: {
-        items () {
-          return [
-            {
-              name: 'Users',
-              children: this.users,
-            },
-          ]
-        },
-        selected () {
-          if (!this.active.length) return undefined
-  
-          const id = this.active[0]
-  
-          return this.users.find(user => user.id === id)
-        },
+                    <v-card>
+                        <v-toolbar dark color="primary" flat>
+                            <v-btn icon dark @click="dialog = false">
+                                <v-icon>mdi-close</v-icon>
+                            </v-btn>
+                            <v-toolbar-title>Filter</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                            <v-toolbar-items>
+                                <v-btn dark text @click="dialog = false">
+                                    Done
+                                </v-btn>
+                            </v-toolbar-items>
+                        </v-toolbar>
+                        <filter-side
+                            :filter-rating="filterRating"
+                            :filter-category="filterCategory"
+                            :filter-radio="filterRadio"
+                            :filter-check="filterCheck"
+                            :filter-tag="filterTag"
+                            :handle-check-all="handleCheckAll"
+                            @change-rating="handleRating"
+                            @change-category="handleCategory"
+                            @change-radio="handleRadio"
+                            @change-check="handleCheck"
+                            @change-range="handleRangeFilter"
+                            @collect-tag="handleCollectTag"
+                        />
+                    </v-card>
+                </v-dialog>
+                <v-row align="start" justify="start">
+                  <v-col lg="10" md="9" cols="12">
+                      <v-row>
+                          <v-col v-if="filteredItems.length < 1" sm="12">
+                              <h3>Not found</h3>
+                          </v-col>
+                          <v-col
+                              v-for="(item, index) in filteredItems"
+                              :key="index"
+                              v-if="
+                                  item.title.toLowerCase().indexOf(keyword) >
+                                  -1
+                              "
+                              :sm="toggleView === 0 ? 4 : 12"
+                              cols="12"
+                              class="mb-5"
+                          >
+                              <div class="d-flex justify-center">
+                                  <card-products
+                                      :rating="item.rating"
+                                      :price="item.price"
+                                      :title="item.title"
+                                      :desc="
+                                          'Category: ' +
+                                          item.category +
+                                          ' ~ ' +
+                                          'Tag: ' +
+                                          item.tag +
+                                          ' ~ ' +
+                                          'Check: ' +
+                                          item.check +
+                                          ' ~ ' +
+                                          'Radio: ' +
+                                          item.radio
+                                      "
+                                      :orientation="
+                                          toggleView === 0
+                                              ? 'portrait'
+                                              : 'landscape'
+                                      "
+                                      img="https://picsum.photos/510/300?random"
+                                      type="round"
+                                      href="/collection/detail-product"
+                                  />
+                              </div>
+                          </v-col>
+                      </v-row>
+                  </v-col>
+                    <v-col class="pa-0 pa-md-3" lg="2" md="3" cols="12">
+                        <!-- <hidden point="smDown"> -->
+                            <filter-side
+                                :filter-rating="filterRating"
+                                :filter-category="filterCategory"
+                                :filter-radio="filterRadio"
+                                :filter-check="filterCheck"
+                                :filter-tag="filterTag"
+                                :handle-check-all="handleCheckAll"
+                                @change-rating="handleRating"
+                                @change-category="handleCategory"
+                                @change-radio="handleRadio"
+                                @change-check="handleCheck"
+                                @change-range="handleRangeFilter"
+                                @collect-tag="handleCollectTag"
+                            />
+                        <!-- </hidden> -->
+                    </v-col>
+                </v-row>
+            </v-container>
+        </div>
+    </div>
+</template>
+<script>
+import CardProducts from './includes/ProductCardComponent.vue'
+import Sorter from './includes/SorterComponent.vue'
+import Filter from './includes/FilterComponent.vue'
+import products from "./includes/productos_api";
+const checkItems = [
+    "check-a",
+    "check-b",
+    "check-c",
+    "check-d",
+    "check-e",
+    "check-f",
+];
+export default {
+  components: {
+    CardProducts,
+    Sorter,
+    'filter-side': Filter,
+  },
+  data() {
+    return {
+      dialog: false,
+      sortBy: 'price',
+      sortFrom: -1,
+      sortTo: 1,
+      toggleView: 0,
+      filterRating: 0,
+      filterCategory: 'all',
+      filterRadio: 'all',
+      filterCheck: checkItems,
+      range: {
+        from: 0,
+        to: 100
       },
-  
-      watch: {
-        selected: 'randomAvatar',
+      sortBySelected: {
+        title: 'Highest Price',
+        value: 'price-asc'
       },
-  
-      methods: {
-        async fetchUsers (item) {
-          // Remove in 6 months and say
-          // you've made optimizations! :)
-          await pause(1500)
-  
-          return fetch('https://jsonplaceholder.typicode.com/users')
-            .then(res => res.json())
-            .then(json => (item.children.push(...json)))
-            .catch(err => console.warn(err))
-        },
-        randomAvatar () {
-          this.avatar = avatars[Math.floor(Math.random() * avatars.length)]
-        },
-      },
+      filterTag: ['tag-one', 'tag-two', 'tag-three', 'tag-four'],
+      keyword: '',
+      cardItems: products
     }
-  </script>
+  },
+  methods: {
+    handleOpenFilter() {
+      this.dialog = true
+    },
+    handleRating(val) {
+      this.filterRating = val
+    },
+    handleCategory(val) {
+      this.filterCategory = val
+    },
+    handleRadio(val) {
+      this.filterRadio = val
+    },
+    handleCheck(val) {
+      this.filterCheck = val
+    },
+    handleCheckAll() {
+      this.filterCheck = checkItems
+    },
+    handleRangeFilter(val) {
+      this.range.from = val.from
+      this.range.to = val.to
+    },
+    handleCollectTag(val) {
+      this.filterTag = val
+    },
+    handleToggleView(val) {
+      this.toggleView = val
+    },
+    handleSortBy(e) {
+      switch (e.value) {
+        case 'title-asc':
+          this.sortBy = 'title'
+          this.sortFrom = 1
+          this.sortTo = -1
+          break
+        case 'title-desc':
+          this.sortBy = 'title'
+          this.sortFrom = -1
+          this.sortTo = 1
+          break
+        case 'price-asc':
+          this.sortBy = 'price'
+          this.sortFrom = -1
+          this.sortTo = 1
+          break
+        default:
+          this.sortBy = 'price'
+          this.sortFrom = 1
+          this.sortTo = -1
+      }
+    }
+  },
+  computed: {
+    filteredItems: function() {
+      // Compare same tag
+      const intersection = (firstArray, secondArray) =>
+        firstArray.filter(element => secondArray.includes(element))
+
+      // Check is all categories checked
+      const checkFilter = (item, filterData) => {
+        if (filterData !== 'all') {
+          return item === filterData
+        }
+        return true
+      }
+
+      return this.cardItems
+        .filter(cardItem => {
+          return (
+            checkFilter(cardItem.category, this.filterCategory) &&
+            checkFilter(cardItem.radio, this.filterRadio) &&
+            cardItem.price >= this.range.from &&
+            cardItem.price <= this.range.to &&
+            cardItem.rating >= this.filterRating &&
+            this.filterCheck.indexOf(cardItem.check) > -1 &&
+            intersection(this.filterTag, cardItem.tag).length > 0
+          )
+        })
+        .sort(
+          (a, b) =>
+            a[this.sortBy] > b[this.sortBy] ? this.sortFrom : this.sortTo
+        )
+    }
+  },
+  head() {
+    return {
+      title: brand.starter.name + ' - Product List'
+    }
+  }
+};
+</script>
