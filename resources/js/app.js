@@ -5,76 +5,28 @@
  */
 
 require('./bootstrap');
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
-import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
-import VueRouter from 'vue-router'
 
 window.Vue = require('vue').default;
-Vue.use(Vuetify)
-Vue.use(VueRouter)
 
+/**
+ * The following block of code may be used to automatically register your
+ * Vue components. It will recursively scan this directory for the Vue
+ * components and automatically register them with their "basename".
+ *
+ * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ */
 
-Vue.component('home-consultas-component', require('./components/HomeConsultasComponent.vue').default);
-Vue.component('usuarios-consultas-component', require('./components/UsuariosComponent.vue').default);
-Vue.component('productos-consultas-component', require('./components/ProductosComponent.vue').default); //declaramos el componente
+// const files = require.context('./', true, /\.vue$/i)
+// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-let  home_consultas = {
-    template: `<home-consultas-component></home-consultas-component>`
-}
-let  usuarios_consultas = {
-    template: `<usuarios-consultas-component></usuarios-consultas-component>`
-}
-let  productos_consulta = {//lo asignamos a una variable manipulable en router
-    template: `<productos-consultas-component></productos-consultas-component>`
-}
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-const router = new VueRouter({
-
-    routes: [
-        {
-        path: '/',
-        name: 'home',
-        component: home_consultas
-
-    },
-        {
-        path: '/usuarios',
-        name: 'users',
-        component: usuarios_consultas
-
-    },
-        {//creamos la ruta en el app.js  
-        path: '/productos-view/',
-        name: 'product',
-        component: productos_consulta
-
-    }
-],
-    module: 'history',
-    hashbang: false,
-    linkActiveClass: 'active'
-});
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
 
 const app = new Vue({
-    router,
-    vuetify: new Vuetify({
-        iconfont: 'mdi',
-        theme: {
-            themes: {
-                light: {
-                    primary: '#EB8635', // rojo
-                    secondary: '#363636',
-                    accent: '#e3ecf5', // tablas
-                    error: '#FF5252',
-                    info: '#1963ad',
-                    success: '#4CAF50',
-                    warning: '#FFC107',
-                }
-            }
-        },
-    }),
     el: '#app',
-    vuetify: new Vuetify(),
 });

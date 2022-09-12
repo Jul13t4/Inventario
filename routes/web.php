@@ -47,8 +47,8 @@ Route::get('/data', function () {
 Route::get('/usuarios', function () {
     return view('usuarios');
 });
-Route::get("/productos-view/", function () {
-    return view('welcome');
+Route::get('/productos-view', function () {
+    return view('theme-producto.home');
 });
 
 Route::get('ListadoSolicitudes',[SolicitudesController::class,'ListadoSolicitudes']);
