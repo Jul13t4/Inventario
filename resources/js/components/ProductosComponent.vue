@@ -1,120 +1,73 @@
 <template>
-    <div class="main-wrap">
-        <div class="search-content">
-            <v-container>
-                <sorter
-                    :view="toggleView"
-                    :sort-by-selected="sortBySelected"
-                    :result-length="filteredItems.length"
-                    @switch-view="handleToggleView"
-                    @sort-by="handleSortBy"
-                    @open-filter="handleOpenFilter"
-                />
-                <v-dialog
-                    v-model="dialog"
-                    fullscreen
-                    hide-overlay
-                    transition="dialog-bottom-transition"
-                >
-                    <v-card>
-                        <v-toolbar dark color="primary" flat>
-                            <v-btn icon dark @click="dialog = false">
-                                <v-icon>mdi-close</v-icon>
-                            </v-btn>
-                            <v-toolbar-title>Filter</v-toolbar-title>
-                            <v-spacer></v-spacer>
-                            <v-toolbar-items>
-                                <v-btn dark text @click="dialog = false">
-                                    Done
-                                </v-btn>
-                            </v-toolbar-items>
-                        </v-toolbar>
-                        <filter-side
-                            :filter-rating="filterRating"
-                            :filter-category="filterCategory"
-                            :filter-radio="filterRadio"
-                            :filter-check="filterCheck"
-                            :filter-tag="filterTag"
-                            :handle-check-all="handleCheckAll"
-                            @change-rating="handleRating"
-                            @change-category="handleCategory"
-                            @change-radio="handleRadio"
-                            @change-check="handleCheck"
-                            @change-range="handleRangeFilter"
-                            @collect-tag="handleCollectTag"
-                        />
-                    </v-card>
-                </v-dialog>
-                <v-row align="start" justify="start">
-                  <v-col lg="10" md="9" cols="12">
-                      <v-row>
-                          <v-col v-if="filteredItems.length < 1" sm="12">
-                              <h3>Not found</h3>
-                          </v-col>
-                          <v-col
-                              v-for="(item, index) in filteredItems"
-                              :key="index"
-                              v-if="
-                                  item.title.toLowerCase().indexOf(keyword) >
-                                  -1
-                              "
-                              :sm="toggleView === 0 ? 4 : 12"
-                              cols="12"
-                              class="mb-5"
-                          >
-                              <div class="d-flex justify-center">
-                                  <card-products
-                                      :rating="item.rating"
-                                      :price="item.price"
-                                      :title="item.title"
-                                      :desc="
-                                          'Category: ' +
-                                          item.category +
-                                          ' ~ ' +
-                                          'Tag: ' +
-                                          item.tag +
-                                          ' ~ ' +
-                                          'Check: ' +
-                                          item.check +
-                                          ' ~ ' +
-                                          'Radio: ' +
-                                          item.radio
-                                      "
-                                      :orientation="
-                                          toggleView === 0
-                                              ? 'portrait'
-                                              : 'landscape'
-                                      "
-                                      img="https://picsum.photos/510/300?random"
-                                      type="round"
-                                      href="/collection/detail-product"
-                                  />
-                              </div>
-                          </v-col>
-                      </v-row>
-                  </v-col>
-                    <v-col class="pa-0 pa-md-3" lg="2" md="3" cols="12">
-                        <!-- <hidden point="smDown"> -->
-                            <filter-side
-                                :filter-rating="filterRating"
-                                :filter-category="filterCategory"
-                                :filter-radio="filterRadio"
-                                :filter-check="filterCheck"
-                                :filter-tag="filterTag"
-                                :handle-check-all="handleCheckAll"
-                                @change-rating="handleRating"
-                                @change-category="handleCategory"
-                                @change-radio="handleRadio"
-                                @change-check="handleCheck"
-                                @change-range="handleRangeFilter"
-                                @collect-tag="handleCollectTag"
-                            />
-                        <!-- </hidden> -->
-                    </v-col>
-                </v-row>
-            </v-container>
-        </div>
+  <div class="main-wrap">
+    <div class="search-content">
+      <v-container>
+        <sorter :view="toggleView" :sort-by-selected="sortBySelected" :result-length="filteredItems.length"
+          @switch-view="handleToggleView" @sort-by="handleSortBy" @open-filter="handleOpenFilter" />
+        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+          <v-card>
+            <v-toolbar dark color="primary" flat>
+              <v-btn icon dark @click="dialog = false">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+              <v-toolbar-title>Filter</v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-toolbar-items>
+                <v-btn dark text @click="dialog = false">
+                  Done
+                </v-btn>
+              </v-toolbar-items>
+            </v-toolbar>
+            <filter-side :filter-rating="filterRating" :filter-category="filterCategory" :filter-radio="filterRadio"
+              :filter-check="filterCheck" :filter-tag="filterTag" :handle-check-all="handleCheckAll"
+              @change-rating="handleRating" @change-category="handleCategory" @change-radio="handleRadio"
+              @change-check="handleCheck" @change-range="handleRangeFilter" @collect-tag="handleCollectTag" />
+          </v-card>
+        </v-dialog>
+        <v-row align="start" justify="start">
+          <v-col lg="10" md="9" cols="12">
+            <v-row>
+              <v-col v-if="cardItems.length < 1" sm="12">
+                <h3>Not found</h3>
+              </v-col>
+              <v-col v-for="(item, index) in filteredItems" :key="index" v-if="
+                item.title.toLowerCase().indexOf(keyword) >
+                -1
+              " :sm="toggleView === 0 ? 4 : 12" cols="12" class="mb-5">
+                <div class="d-flex justify-center">
+                  <card-products :rating="item.rating" :price="item.price" :title="item.title" :desc="
+                    'Category: ' +
+                    item.category +
+                    ' ~ ' +
+                    'Tag: ' +
+                    item.tag +
+                    ' ~ ' +
+                    'Check: ' +
+                    item.check +
+                    ' ~ ' +
+                    'Radio: ' +
+                    item.radio
+                  " :orientation="
+  toggleView === 0
+    ? 'portrait'
+    : 'landscape'
+" img="https://picsum.photos/510/300?random" type="round" href="/collection/detail-product" />
+                </div>
+              </v-col>
+            </v-row>
+          </v-col>
+          <v-col class="pa-0 pa-md-3" lg="2" md="3" cols="12">
+            <!-- <hidden point="smDown"> -->
+            <filter-side :filter-rating="filterRating" :filter-category="filterCategory" :filter-radio="filterRadio"
+              :filter-check="filterCheck" :filter-tag="filterTag" :handle-check-all="handleCheckAll"
+              @change-rating="handleRating" @change-category="handleCategory" @change-radio="handleRadio"
+              @change-check="handleCheck" @change-range="handleRangeFilter" @collect-tag="handleCollectTag" />
+            <!-- </hidden> -->
+          </v-col>
+        </v-row>
+      </v-container>
     </div>
+  </div>
 </template>
 <script>
 import CardProducts from './includes/ProductCardComponent.vue'
@@ -122,12 +75,12 @@ import Sorter from './includes/SorterComponent.vue'
 import Filter from './includes/FilterComponent.vue'
 import products from "./includes/productos_api";
 const checkItems = [
-    "check-a",
-    "check-b",
-    "check-c",
-    "check-d",
-    "check-e",
-    "check-f",
+  "Materiales de oficina",
+  "check-b",
+  "check-c",
+  "check-d",
+  "check-e",
+  "check-f",
 ];
 export default {
   components: {
@@ -156,10 +109,26 @@ export default {
       },
       filterTag: ['tag-one', 'tag-two', 'tag-three', 'tag-four'],
       keyword: '',
-      cardItems: products
+      cardItems: products,
+      //cardItems: []
     }
   },
+  created() {
+    this.getShowProduct();
+  },
   methods: {
+    getShowProduct() {
+      axios.get('/showProducts')
+        .then(res => {
+          console.log(res)
+          this.cardItems = res.data;
+          this.filteredItems = this.cardItems;
+        })
+        .catch(err => {
+          console.error(err);
+        })
+    },
+
     handleOpenFilter() {
       this.dialog = true
     },
@@ -213,7 +182,8 @@ export default {
     }
   },
   computed: {
-    filteredItems: function() {
+    filteredItems: function () {
+      // setTimeout(() => {
       // Compare same tag
       const intersection = (firstArray, secondArray) =>
         firstArray.filter(element => secondArray.includes(element))
@@ -242,6 +212,7 @@ export default {
           (a, b) =>
             a[this.sortBy] > b[this.sortBy] ? this.sortFrom : this.sortTo
         )
+      // }, 800); 
     }
   },
   head() {

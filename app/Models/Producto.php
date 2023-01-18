@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ClasificacionProductos;
 
 class Producto extends Model
 {
@@ -15,4 +16,9 @@ class Producto extends Model
         'elemento',
         'id_clasificacion'
     ]; 
+
+    public function clasificacion()
+    {
+        return $this->belongsTo( ClasificacionProductos::class, 'id_clasificacion','id');
+    }
 }

@@ -24,7 +24,7 @@ class SessionsController extends Controller {
             if(auth()->user()->role == 'admin') {
                 return redirect()->route('admin.index');
             } else {
-                return redirect()->to('/data');
+                return redirect()->to('/productos-view');
             }
         }
     }
